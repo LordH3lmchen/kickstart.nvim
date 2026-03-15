@@ -3,6 +3,7 @@
 --
 -- See the kickstart.nvim README for more information
 
+---@type LazySpec
 return {
   'nvimtools/none-ls.nvim',
   dependencies = {
@@ -14,9 +15,7 @@ return {
     'iamcco/markdown-preview.nvim',
     cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
     build = 'cd app && yarn install',
-    init = function()
-      vim.g.mkdp_filetypes = { 'markdown' }
-    end,
+    init = function() vim.g.mkdp_filetypes = { 'markdown' } end,
     ft = { 'markdown' },
   },
   config = function()
@@ -59,9 +58,7 @@ return {
           vim.api.nvim_create_autocmd('BufWritePre', {
             group = augroup,
             buffer = bufnr,
-            callback = function()
-              vim.lsp.buf.format { async = false }
-            end,
+            callback = function() vim.lsp.buf.format { async = false } end,
           })
         end
       end,
